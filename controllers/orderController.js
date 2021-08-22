@@ -15,7 +15,6 @@ class orderController {
     async addOrder(req, res) {
         try {
             const {firstname, lastname, email, phone, datetime, items, delivery} = req.body
-            console.log(req.body.items)
             const order = new Order({firstname, lastname, email, phone, datetime, items: [...items], delivery})
             await order.save()
 
