@@ -7,7 +7,8 @@ const CatalogItem = new Schema({
     count: {type: "Number", required: true},
     brand: {type: String, ref: 'Brand'},
     category: {type: String, ref: 'Category'},
-    image: {type: String}
+    image: {type: String},
+    quantity: {type: Number, required: false}
 })
 
 module.exports = model('CatalogItem', CatalogItem)

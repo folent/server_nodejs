@@ -4,7 +4,7 @@ class opinionController {
     async getOpinions(req, res) {
         try {
             const itemId = req.params.itemId
-            const opinions = await Opinion.find({item: itemId})
+            const opinions = await Opinion.find({ item: itemId })
 
             res.status(200).json(opinions)
         } catch (e) {

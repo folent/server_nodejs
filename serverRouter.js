@@ -4,6 +4,8 @@ const authController = require('./controllers/authController')
 const catalogController = require('./controllers/catalogController')
 const orderController = require('./controllers/orderController')
 const opinionController = require('./controllers/opinionController')
+const statsController = require('./controllers/statsController')
+const brandsController = require('./controllers/brandsController')
 const {check} = require('express-validator')
 const authMiddleware = require('./middleware/authMiddleware')
 const roleMiddleware = require('./middleware/roleMiddleware')
@@ -25,10 +27,16 @@ router.get('/catalogitemsbycategory/:id', catalogController.getCatalogItemsByCat
 router.get('/catalogitem/:id', catalogController.getCatalogItemByID)
 router.get('/catalogitems/page/:currentPage/count/:pageSize/sortby/:sort', catalogController.getSortCatalogItems)
 router.get('/catalogitemscount/', catalogController.getCatalogItemsCount)
+router.get('/catalogitemsbybrand/:id', catalogController.getCatalogItemsByBrand)
 
 router.post('/orders', orderController.getOrders)
 router.post('/order/', orderController.addOrder)
+router.get('/order/:id', orderController.getOrderByID)
 
 router.get('/opinions/:itemId', opinionController.getOpinions)
 router.post('/opinions/', opinionController.addOpinion)
+
+router.get('/stats', statsController.getStatsOrdersByMonth)
+
+router.get('/brands', brandsController.getBrands)
 module.exports = router

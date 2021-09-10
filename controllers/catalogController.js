@@ -39,12 +39,12 @@ class catalogController {
         try {
             const categoryID = req.params.id
 
-            const category = await Category.findOne( {_id:  categoryID }) ;
+            const category = await Category.findOne( { _id:  categoryID }) ;
 
             if(!category) {
-                return res.status(400).json({message: "Категория не найдена"})
+                return res.status(400).json({ message: "Категория не найдена" })
             }
-            const catalogItems = await CatalogItem.find({category: category.name})
+            const catalogItems = await CatalogItem.find({ category: category.name })
             res.status(200).json(catalogItems)
         } catch (e) {
             console.log(e)
@@ -55,10 +55,10 @@ class catalogController {
         try {
             const catalogItemID = req.params.id
 
-            const catalogItem = await CatalogItem.findOne( {_id:  catalogItemID }) ;
+            const catalogItem = await CatalogItem.findOne( {_id:  catalogItemID });
 
             if(!catalogItem) {
-                return res.status(400).json({message: "Товар не найден"})
+                return res.status(400).json({ message: "Товар не найден" })
             }
             res.status(200).json(catalogItem)
         } catch (e) {
@@ -67,7 +67,6 @@ class catalogController {
     }
     async getSortCatalogItems(req, res) {
         try {
-            console.log(req.params)
             const currentPage = req.params.currentPage
             const pageSize = Number(req.params.pageSize)
             const sort = req.params.sort
@@ -95,6 +94,22 @@ class catalogController {
         try {
             const catalogItemsCount = await CatalogItem.find().count()
             res.status(200).json(catalogItemsCount)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getCatalogItemsByBrand(req, res) {
+        try {
+            const brandId = req.params.id
+            const brand = await Brand.findById(brandId);
+
+            if(!brand) {
+                return res.status(400).json({ message: "Бренд не найден" });
+            }
+            const CatalogItems = await CatalogItem.find({ brand: brand.name })
+
+            res.status(200).json(CatalogItems)
         } catch (e) {
             console.log(e)
         }
