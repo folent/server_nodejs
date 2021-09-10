@@ -15,7 +15,6 @@ class opinionController {
     async addOpinion(req, res) {
         try {
             const {text, name, item, datetime} = req.body
-            console.log(text, name, item, datetime)
             const opinion = new Opinion({text, datetime, name, item})
             await opinion.save()
 
